@@ -33,7 +33,17 @@ class User(Base):
     wallet_balance = Column(Float, default=0.0)
     hashed_password = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+    
+    # Activity tracking (for inactivity alerts)
+    last_activity_at = Column(DateTime, default=datetime.utcnow)
+    tutorial_completed = Column(Boolean, default=False)
+    notification_token = Column(String, nullable=True)  # For push notifications
 
     tenant = relationship("Tenant", back_populates="users")
     assignments = relationship("Assignment", back_populates="agent")
     tracking_links = relationship("TrackingLink", back_populates="agent")
+    
+    # New relationships for contact system
+    vcf_batches = relationship("VcfBatch", back_populates="agent")
+    progress_reports = relationship("AgentProgress", back_populates="agent")
+

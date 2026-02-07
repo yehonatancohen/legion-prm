@@ -1,4 +1,5 @@
 from typing import Optional
+import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
@@ -6,7 +7,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     
     POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = "postgrespassword"
+    POSTGRES_PASSWORD: str = ""  # Set via environment variable
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "promotion_manager"

@@ -10,12 +10,17 @@ class TrackingLink(Base):
 
     short_code = Column(String, primary_key=True, index=True)
     agent_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
-    target_id = Column(UUID(as_uuid=True), ForeignKey("campaign_targets.id"), nullable=False)
+    target_id = Column(UUID(as_uuid=True), ForeignKey("campaign_targets.id"), nullable=True)  # Now optional
     campaign_id = Column(UUID(as_uuid=True), ForeignKey("campaigns.id"), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+    
+    # Track unique views per link
+    view_count = Column(Integer, default=0)
+    unique_view_count = Column(Integer, default=0)
 
     agent = relationship("User", back_populates="tracking_links")
     target = relationship("CampaignTarget", back_populates="tracking_links")
+    campaign = relationship("Campaign", back_populates="tracking_links")
 
 class AnalyticsEvent(Base):
     __tablename__ = "analytics_events"

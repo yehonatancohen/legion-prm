@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Bob Agent",
+    "score": 150,
+    "balance": 50.0
+  },
+  {
+    "name": "Charlie Agent",
+    "score": 320,
+    "balance": 120.0
+  }
+]
